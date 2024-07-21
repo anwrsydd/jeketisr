@@ -38,7 +38,7 @@ export default function Home({
     return (
         <>
             <div className="overflow-auto">
-                <p className="font-semibold">Live terakhir</p>
+                <h2 className="font-semibold">Live terakhir</h2>
                 <div className="snap-x snap-mandatory flex overflow-x-auto h-[21rem] gap-14 p-4 shadow-inner bg-white/40 rounded-xl">
                     {last_live.map((obj, indx) => (
                         <div
@@ -55,9 +55,9 @@ export default function Home({
                                         height="135"
                                         alt={obj.name}
                                     />
-                                    <p className="absolute top-1 left-2 bg-gray-300 text-sm rounded-xl px-2">
+                                    <h3 className="absolute top-1 left-2 bg-gray-300 text-sm rounded-xl px-2">
                                         {obj.type === "SR" ? "SHOWROOM" : "IDN Live"}
-                                    </p>
+                                    </h3>
                                 </div>
                                 <div className="p-2 px-3">
                                     {obj.status && (
@@ -66,7 +66,7 @@ export default function Home({
                                             <p className="text-sm">Now Live!</p>
                                         </div>
                                     )}
-                                    <h1 className="text-sm">{obj.name}</h1>
+                                    <h4 className="text-sm">{obj.name}</h4>
                                     <div className="flex gap-3">
                                         <FontAwesomeIcon icon={faClock} className="mt-2" />
                                         <p className="text-sm mt-1">
@@ -103,7 +103,7 @@ export default function Home({
                 </div>
             </div>
             <div className="overflow-auto mt-4">
-                <p className="font-semibold">Jadwal SHOW (SR Premium Live)</p>
+                <h2 className="font-semibold">Jadwal SHOW (SR Premium Live)</h2>
                 <div className="snap-x snap-mandatory flex overflow-x-auto h-[20rem] gap-14 p-4 shadow-inner bg-white/40 rounded-xl">
                     {show_schedule.map((o, i) => (
                         <div
@@ -120,7 +120,7 @@ export default function Home({
                                     alt={o.title}
                                 />
                                 <div className="p-2 px-3">
-                                    <p className="text-sm font-semibold mb-2">{o.title}</p>
+                                    <h3 className="text-sm font-semibold mb-2">{o.title}</h3>
                                     {o.is_onlive && (
                                         <div className="flex gap-3">
                                             <span className="bg-red-500 w-4 h-4 rounded-full animate-fade mt-0.5"></span>
@@ -141,7 +141,7 @@ export default function Home({
                 </div>
             </div>
             <div className="mt-4 md:mx-[2rem]">
-                <p className="text-base font-semibold">Next Birthday (bulan ini)</p>
+                <h2 className="text-base font-semibold">Next Birthday (bulan ini)</h2>
                 <div className="grid grid-cols-1 gap-1 md:mx-[2rem]">
                     {member_birthday.map((o, i) => {
                         const bd = moment(o.birthday, "D MMMM YYYY").format("D MMMM");
@@ -166,7 +166,7 @@ export default function Home({
                                         />
                                     </div>
                                     <div className="col-span-2 w-[120px] md:w-[120px]">
-                                        <p className="text-sm font-medium">{o.full_name.split("/")[0]}</p>
+                                        <h3 className="text-sm font-medium">{o.full_name.split("/")[0]}</h3>
                                         <div className="flex space-x-1">
                                             <FontAwesomeIcon icon={faCalendar} className="mt-0.5" />
                                             <p className="text-sm font-medium">{bd}</p>

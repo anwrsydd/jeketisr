@@ -5,7 +5,7 @@ import { faInstagram, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 export default function About() {
     return (
         <div className="m-3 md:mx-6">
-            <h1 className="font-semibold text-lg">About</h1>
+            <h2 className="font-semibold text-lg">About</h2>
             <div className="mx-3">
                 <div className="p-2 bg-gray-200 rounded-xl text-sm" data-aos="fade-up" data-aos-delay="300">
                     <p>
