@@ -74,7 +74,10 @@ export default function Header({ className }: { className: string }) {
                     key="animation-on-state"
                     variants={variants}
                     animate={isShow ? "show" : "hide"}
-                    initial={{ y: -30, display: "none" }}
+                    initial={{
+                        y: -30,
+                        display: "none",
+                    }}
                     className="min-w-[8rem] md:min-w-[10rem] absolute right-3 top-[4rem] bg-gray-200 p-3 rounded-b-xl grid grid-cols-1 font-lexend"
                 >
                     {menuItems.map((o, i) => {

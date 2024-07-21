@@ -15,14 +15,18 @@ type ShowDetail = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (!req.query.id) {
-        return res.status(400).json({ error: "parameter required." });
+        return res.status(400).json({
+            error: "parameter required.",
+        });
     } else {
         const { id } = req.query;
         const data = await fetch_premium_live();
         const dt = await get_theater_schedule();
         const final_data = data.filter((d) => d.paid_live_id === Number(id));
         if (final_data.length < 1) {
-            return res.status(200).json({ error: "data not found." });
+            return res.status(200).json({
+                error: "data not found.",
+            });
         } else {
             try {
                 const theater = dt.filter((d: any) => d.show_date === final_data[0].start_at)[0];
@@ -31,7 +35,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 for (let i = 0; i < theater.member_perform.length; i++) {
                     const find_member = members.find((datas) => datas.full_name === theater.member_perform[i]);
                     //if (find_member !== undefined) {
-                    member_perform.push({ ...find_member });
+                    member_perform.push({
+                        ...find_member,
+                    });
                     //}
                 }
                 const setlist_img_r = setlist_image.find((objk) =>

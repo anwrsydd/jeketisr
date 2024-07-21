@@ -9,7 +9,10 @@ async function fetch_premium_live(): Promise<JKT48.PremiumLive[]> {
     for (let i = 0; i < data_r.length; i++) {
         const setlist_img_r = setlist_image.find((obj) => obj.title.startsWith(data_r[i].title.split(" -")[0]));
         const setlist_img = setlist_img_r !== undefined ? setlist_img_r.url : data_r[i].image;
-        data.push({ ...data_r[i], setlist_img });
+        data.push({
+            ...data_r[i],
+            setlist_img,
+        });
     }
     return data;
 }

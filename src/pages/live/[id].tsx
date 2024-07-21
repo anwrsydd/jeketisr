@@ -43,7 +43,9 @@ export default function LiveDetail(props: { detail: Detail }) {
     const [streamQuality, setStreamQuality] = useState<any>(
         detail.type === "SR" && detail.status
             ? (props.detail.streaming_u?.[0] as StreamingURL)
-            : ({ url: "" } as StreamingURL),
+            : ({
+                  url: "",
+              } as StreamingURL),
     );
     function changeQuality(quality: number) {
         setStreamQuality(props.detail.streaming_u?.find((s: any) => s.quality === quality));
@@ -213,7 +215,13 @@ export async function getServerSideProps(context: any) {
                     const dt = get_live_s_url.data.streaming_url_list.filter((e: StreamingURL) => e?.type === "hls");
                     return {
                         props: {
-                            detail: { ...detail[0], gift_idr: { res: 0 }, streaming_u: dt },
+                            detail: {
+                                ...detail[0],
+                                gift_idr: {
+                                    res: 0,
+                                },
+                                streaming_u: dt,
+                            },
                         },
                     };
                 } else {
@@ -237,8 +245,14 @@ export async function getServerSideProps(context: any) {
                         props: {
                             detail: {
                                 ...detail[0],
-                                gift_idr: { res: 0 },
-                                streaming_u: [{ url: dt }],
+                                gift_idr: {
+                                    res: 0,
+                                },
+                                streaming_u: [
+                                    {
+                                        url: dt,
+                                    },
+                                ],
                             },
                         },
                     };
@@ -247,7 +261,9 @@ export async function getServerSideProps(context: any) {
                         props: {
                             detail: {
                                 ...detail[0],
-                                gift_idr: { res: 0 },
+                                gift_idr: {
+                                    res: 0,
+                                },
                             },
                         },
                     };

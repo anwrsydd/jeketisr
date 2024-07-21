@@ -27,7 +27,9 @@ function convertCurrency(from: string, to: string, num: number): Promise<GiftIDR
     return new Promise((resolve, reject) => {
         axios
             .get("https://www.xe.com/api/protected/charting-rates/?fromCurrency=" + from + "&toCurrency=" + to, {
-                headers: { Authorization: "Basic bG9kZXN0YXI6cHVnc25heA==" },
+                headers: {
+                    Authorization: "Basic bG9kZXN0YXI6cHVnc25heA==",
+                },
             })
             .then((res) => {
                 let jumlahkan =

@@ -54,7 +54,13 @@ async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
             let setlist_name = d[1].children[2].data;
             let member_perform = d[2].children
                 .filter((j: { type: string }) => j.type === "tag")
-                .map((l: { children: { data?: any }[] }) => l.children[0]?.data)
+                .map(
+                    (l: {
+                        children: {
+                            data?: any;
+                        }[];
+                    }) => l.children[0]?.data,
+                )
                 .filter((k: any) => k !== undefined);
             theater_schedule.push({
                 show_date,
