@@ -27,7 +27,7 @@ export default function Document() {
                 <meta name="twitter:image" content="https://jkt48sr.anwrsyd.xyz/metadata-img.jpg" />
                 <meta name="twitter:site" content="@defaultsite" />
                 <meta name="twitter:creator" content="@defaultcreator" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
             </Head>
             <body className="bg-gray-300">

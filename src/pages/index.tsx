@@ -45,7 +45,7 @@ export default function Home({
                             className="snap-always snap-center shrink-0 w-60 h-[19rem] shadow-xl bg-gray-200 rounded-xl"
                             key={`live-history-${indx}`}
                         >
-                            <Link href={`/live/${obj.d_id}`}>
+                            <Link href={`/live/${obj.d_id}`} title={obj.name}>
                                 <div className="relative">
                                     <Image
                                         src={obj.image}
@@ -95,7 +95,7 @@ export default function Home({
                         </div>
                     ))}
                     <div className="snap-always snap-center justify-self-center h-[18rem] hover:scale-110 duration-300 transition-all">
-                        <Link href="/history-live">
+                        <Link href="/history-live" title="See all history live">
                             <FontAwesomeIcon className="mt-[8rem] text-3xl" icon={faArrowRight} />
                             <p className="text-sm font-semibold">See all history live</p>
                         </Link>
@@ -110,7 +110,7 @@ export default function Home({
                             className="snap-always snap-center shrink-0 w-60 h-[18rem] shadow-xl bg-gray-200 rounded-xl hover:scale-105 duration-500"
                             key={i}
                         >
-                            <Link href={`/theater/${o.paid_live_id}`}>
+                            <Link title={o.title} href={`/theater/${o.paid_live_id}`}>
                                 <Image
                                     src={o.setlist_img}
                                     className="object-cover shrink-0 w-[240px] h-[135px] rounded-t-lg"
@@ -148,6 +148,7 @@ export default function Home({
                         return (
                             <Link
                                 href={`/member/${o.sr_room_url_key.toLowerCase()}`}
+                                title={o.full_name}
                                 key={i}
                                 className={`h-[8rem] w-[15rem] md:w-[250px] justify-self-left ${i % 2 === 0 ? "justify-self-start" : "justify-self-end"}`}
                             >

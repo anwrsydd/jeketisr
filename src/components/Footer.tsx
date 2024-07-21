@@ -8,8 +8,8 @@ export default function Footer() {
             </div>
             <div className="flex justify-center space-x-1">
                 <p className="font-medium">Dibuat oleh</p>
-                <Link href="https://instagram.com/@anwr.syd">
-                    <h5 className="font-semibold text-blue-600">AnwrSyd</h5>
+                <Link href="https://instagram.com/@anwr.syd" title="Instagram">
+                    <h4 className="font-semibold text-blue-600">AnwrSyd</h4>
                 </Link>
             </div>
         </footer>
