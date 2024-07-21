@@ -18,7 +18,7 @@ import { getFirestore, getDocs, collection, query, where, orderBy, limit } from 
 import { numberWithCommas, count_time } from "../lib/utils/additional";
 import { fetch_premium_live, get_room_profile } from "../lib/utils/showroom";
 import { get_member_birthday } from "../lib/utils/fetch_data";
-import { get_history_live } from "../lib/utils/get_history_live";
+import { get_history_live, get_data_length } from "../lib/utils/get_history_live";
 import AOS from "aos";
 
 moment.tz.setDefault("Asia/Jakarta");
@@ -199,12 +199,13 @@ export default function Home({
 
 export async function getServerSideProps(): Promise<Object> {
     const show_schedule = await fetch_premium_live();
-    const last_live = await get_history_live(0, 5);
+    const data_length = await get_data_length("jkt48_live_history")
+    const last_live = await get_history_live(data_length - 10, data_length - (10 - 10));
     let member_birthday = await get_member_birthday();
     return {
         props: {
             show_schedule,
-            last_live,
+            last_live: last_live.reverse(),
             member_birthday,
         },
     };

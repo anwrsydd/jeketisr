@@ -95,7 +95,7 @@ export default function HistoryLive({
                     Showing
                     <span className="font-semibold">{10 * q - 10}</span>
                     to
-                    <span className="font-semibold">{10 * q}</span>
+                    <span className="font-semibold">{10 * q > total_data ? total_data : 10 * q}</span>
                     of
                     <span className="font-semibold">{total_data}</span>
                     data
@@ -132,10 +132,10 @@ export async function getServerSideProps(context: any): Promise<Object> {
             },
         };
     } else {
-        const last_live = await get_history_live(10 * q - 10, 10 * q);
+        const last_live = await get_history_live(getDataLength - (10 * q), getDataLength - ((10 * q) - 10));
         return {
             props: {
-                last_live,
+                last_live: last_live.reverse(),
                 q,
                 total_data: getDataLength,
                 error: false,
