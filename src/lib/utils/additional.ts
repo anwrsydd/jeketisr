@@ -23,25 +23,38 @@ function count_time(t1: number, t2: number): String {
     return `${jam > 9 ? jam : "0" + jam}:${menit > 9 ? menit : "0" + menit}:${detik > 9 ? detik : "0" + detik}`;
 }
 
-function convertCurrency(from: string, to: string, num: number): Promise<GiftIDR> {
+function convertCurrency(
+    from: string,
+    to: string,
+    num: number,
+): Promise<GiftIDR> {
     return new Promise((resolve, reject) => {
         axios
-            .get("https://www.xe.com/api/protected/charting-rates/?fromCurrency=" + from + "&toCurrency=" + to, {
-                headers: {
-                    Authorization: "Basic bG9kZXN0YXI6cHVnc25heA==",
+            .get(
+                "https://www.xe.com/api/protected/charting-rates/?fromCurrency=" +
+                    from +
+                    "&toCurrency=" +
+                    to,
+                {
+                    headers: {
+                        Authorization: "Basic bG9kZXN0YXI6cHVnc25heA==",
+                    },
                 },
-            })
+            )
             .then((res) => {
                 let jumlahkan =
                     num *
                     res.data.batchList[res.data.batchList.length - 1].rates[
-                        res.data.batchList[res.data.batchList.length - 1].rates.length - 1
+                        res.data.batchList[res.data.batchList.length - 1].rates
+                            .length - 1
                     ];
                 resolve({
                     from,
                     to,
-                    rates: res.data.batchList[res.data.batchList.length - 1].rates[
-                        res.data.batchList[res.data.batchList.length - 1].rates.length - 1
+                    rates: res.data.batchList[res.data.batchList.length - 1]
+                        .rates[
+                        res.data.batchList[res.data.batchList.length - 1].rates
+                            .length - 1
                     ],
                     res: jumlahkan,
                 });

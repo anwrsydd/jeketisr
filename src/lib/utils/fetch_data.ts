@@ -72,4 +72,13 @@ async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
     return theater_schedule.reverse();
 }
 
-export { get_member_detail, get_members, get_member_birthday, get_theater_schedule };
+async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
+    const q = collection(db, 'jkt48_members')
+    const snapshot = await getDocs(q);
+    const data = snapshot.docs.map((d) => {
+        return d.data() as JKT48.PremiumLive
+    })
+    return data;
+}
+
+export { get_member_detail, get_members, get_member_birthday, get_theater_schedule, get_premium_live };
