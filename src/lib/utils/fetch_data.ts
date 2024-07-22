@@ -73,7 +73,7 @@ async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
 }
 
 async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
-    const q = collection(db, 'jkt48_members')
+    const q = collection(db, 'jkt48_shows')
     const snapshot = await getDocs(q);
     const data = snapshot.docs.map((d) => {
         return d.data() as JKT48.PremiumLive
