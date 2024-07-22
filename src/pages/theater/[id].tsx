@@ -18,9 +18,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import ErrorMsg from "@/components/ErrorMsg";
 
-export default function TheaterDetail() {
-    const router = useRouter();
-    const id = router.query.id;
+export default function TheaterDetail({ id }: { id: string | number }) {
     const [detail, setDetail] = useState<any>();
     const [isError, setIsError] = useState<boolean>(false);
     const [isLoad, setIsLoad] = useState<boolean>(true);
@@ -36,11 +34,11 @@ export default function TheaterDetail() {
                         setIsLoad(false);
                     }
                 } catch {
-                    setIsError(true);
+                    setIsError(true)
                 }
             });
     }, [id]);
-    if (isError) return <ErrorMsg />;
+    if (isError) return <ErrorMsg />
     if (isLoad) return <p>Loading...</p>;
     return (
         <>
@@ -49,7 +47,7 @@ export default function TheaterDetail() {
                     <Image
                         src={detail.setlist_img}
                         width="337"
-                        height="139"
+                        height="189"
                         alt={detail.title}
                         className="rounded-xl mb-2 shadow-xl"
                         data-aos="fade-up"
@@ -132,4 +130,12 @@ export default function TheaterDetail() {
             </div>
         </>
     );
+}
+
+export async function getServerSideProps(context: any): Promise<Object> {
+    return {
+        props: {
+            id: context.params.id
+        }
+    }
 }

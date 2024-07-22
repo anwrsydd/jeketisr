@@ -5,6 +5,7 @@ import "moment/locale/id";
 import { db } from "../database/firestore";
 import { getFirestore, getDocs, collection, query, where, orderBy, limit } from "firebase/firestore";
 import { get_room_profile } from "./showroom";
+import { setlist_image } from "../../../config/config";
 
 async function get_member_detail(r_u_k: string): Promise<JKT48.MemberDetail[]> {
     const q = query(collection(db, "jkt48_members"), where("sr_room_url_key", "==", r_u_k), limit(1));
@@ -73,10 +74,16 @@ async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
 }
 
 async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
-    const q = collection(db, 'jkt48_shows')
+    const q = query(collection(db, 'jkt48_shows'), orderBy('start_at', 'asc'))
     const snapshot = await getDocs(q);
     const data = snapshot.docs.map((d) => {
-        return d.data() as JKT48.PremiumLive
+        const dt = d.data()
+        const setlist_img_r = setlist_image.find((obj) => obj.title.startsWith(dt.title.split(" -")[0]));
+        const setlist_img = setlist_img_r !== undefined ? setlist_img_r.url : dt.image;
+        return {
+            ...dt,
+            setlist_img
+        } as JKT48.PremiumLive
     })
     return data;
 }

@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { fetch_premium_live } from "@/lib/utils/showroom";
-import {
-    get_theater_schedule,
-    get_members,
-    get_premium_live,
-} from "@/lib/utils/fetch_data";
+import { get_theater_schedule, get_members, get_premium_live } from "@/lib/utils/fetch_data";
 import { SHOWROOM_API, setlist_image } from "../../../../config/config";
 
 type ShowDetail = {
@@ -17,10 +13,7 @@ type ShowDetail = {
     member_perform: object[];
 };
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (!req.query.id) {
         return res.status(400).json({
             error: "parameter required.",
@@ -35,15 +28,10 @@ export default async function handler(
                 error: "data not found.",
             });
         } else {
-            //            try {
-            const theater = dt.filter(
-                (d: any) => d.show_date === final_data[0].start_at,
-            )[0];
-            const member_perform = [];
-            const members = await get_members();
-            console.log(theater);
-            return res.status(200).json(theater);
-            /*
+            try {
+                const theater = dt.filter((d: any) => d.show_date === final_data[0].start_at)[0];
+                const member_perform = [];
+                const members = await get_members();
                 for (let i = 0; i < theater.member_perform.length; i++) {
                     const find_member = members.find((datas) => datas.full_name === theater.member_perform[i]);
                     //if (find_member !== undefined) {
@@ -66,14 +54,11 @@ export default async function handler(
                     setlist_name: theater.setlist_name,
                     member_perform,
                 });
-                */
-            /*
             } catch {
                 return res.status(500).json({
                     error: "there's something error, please contact the developer.",
                 });
             }
-*/
         }
     }
 }
