@@ -237,9 +237,8 @@ export async function getServerSideProps(context: any) {
                 }
             } else {
                 if (detail[0].status) {
-                    const get_live_s_url = await fetch("http://localhost:3000/api/live/idn_stream_url?u=dar-nv");
+                    const get_live_s_url = await fetch("https://"+context.req.headers.host+"/api/live/idn_stream_url?u="+detail[0].url.split('idn.app/')[1]);
                     const dt_r = await get_live_s_url.json();
-                    console.log(dt_r);
                     const dt = dt_r.result[0].playback_url;
                     return {
                         props: {
