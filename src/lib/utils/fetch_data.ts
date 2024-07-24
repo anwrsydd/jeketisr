@@ -74,17 +74,35 @@ async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
 }
 
 async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
-    const q = query(collection(db, 'jkt48_shows'), orderBy('start_at', 'asc'))
+    const q = query(collection(db, "jkt48_shows"), orderBy("start_at", "asc"));
     const snapshot = await getDocs(q);
-    const data = snapshot.docs.map((d) => {
-        const dt = d.data()
+    const data: JKT48.PremiumLive[] = [] as JKT48.PremiumLive[];
+    for (let i = 0; i < snapshot.docs.length; i++) {
+        const dt = snapshot.docs[i].data();
         const setlist_img_r = setlist_image.find((obj) => obj.title.startsWith(dt.title.split(" -")[0]));
         const setlist_img = setlist_img_r !== undefined ? setlist_img_r.url : dt.image;
-        return {
-            ...dt,
-            setlist_img
-        } as JKT48.PremiumLive
-    })
+        const desc_r = await fetch(dt.entrance_url);
+        const desc_d = await desc_r.text();
+        const description = cheerio
+            .load(desc_d)("li.premium-room-content > p.premium-room-telop")
+            .text()
+            .replace("            ", "")
+            .replace("          ", "");
+        data.push({
+            entrance_url: dt.entrance_url,
+            room_url: dt.room_url,
+            image: dt.image,
+            premium_live_type: dt.premium_live_type,
+            is_onlive: dt.is_onlive,
+            title: dt.title,
+            paid_live_id: dt.paid_live_id,
+            room_id: dt.room_id,
+            room_name: dt.room_name,
+            start_at: dt.start_at,
+            setlist_img,
+            description,
+        });
+    }
     return data;
 }
 

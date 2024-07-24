@@ -41,5 +41,6 @@ declare namespace JKT48 {
         room_name: string;
         start_at: number;
         setlist_img: string;
+        description?: string;
     }
 }

@@ -10,11 +10,7 @@ import {
     faCakeCandles,
 } from "@fortawesome/free-solid-svg-icons";
 import { get_live_detail } from "@/lib/utils/get_history_live";
-import {
-    numberWithCommas,
-    count_time,
-    convertCurrency,
-} from "@/lib/utils/additional";
+import { numberWithCommas, count_time, convertCurrency } from "@/lib/utils/additional";
 import moment from "moment-timezone";
 import "moment/locale/id";
 import { useState } from "react";
@@ -52,20 +48,14 @@ export default function LiveDetail(props: { detail: Detail }) {
               } as StreamingURL),
     );
     function changeQuality(quality: number) {
-        setStreamQuality(
-            props.detail.streaming_u?.find((s: any) => s.quality === quality),
-        );
+        setStreamQuality(props.detail.streaming_u?.find((s: any) => s.quality === quality));
     }
     if (props.detail.error) {
         return <ErrorMsg />;
     }
     return (
         <div className="m-2 mt-6 md:mx-8">
-            <div
-                className="flex justify-center"
-                data-aos="fade-right"
-                data-aos-delay="200"
-            >
+            <div className="flex justify-center" data-aos="fade-right" data-aos-delay="200">
                 {!detail.status && (
                     <Image
                         src={detail.image}
@@ -76,29 +66,13 @@ export default function LiveDetail(props: { detail: Detail }) {
                     />
                 )}
                 {detail.status && detail.type === "SR" && (
-                    <video
-                        controls
-                        className="rounded-xl shadow-xl"
-                        width="345"
-                        height="149"
-                        poster={detail.image}
-                    >
-                        <source
-                            src={streamQuality?.url}
-                            type="application/x-mpegURL"
-                        />
+                    <video controls className="rounded-xl shadow-xl" width="345" height="149" poster={detail.image}>
+                        <source src={streamQuality?.url} type="application/x-mpegURL" />
                     </video>
                 )}
                 {detail.status && detail.type === "IDN" && (
-                    <video
-                        controls
-                        className="rounded-xl shadow-xl"
-                        poster={detail.image}
-                    >
-                        <source
-                            src={detail?.streaming_u?.[0].url}
-                            type="application/x-mpegURL"
-                        />
+                    <video controls className="rounded-xl shadow-xl" poster={detail.image}>
+                        <source src={detail?.streaming_u?.[0].url} type="application/x-mpegURL" />
                     </video>
                 )}
             </div>
@@ -110,10 +84,7 @@ export default function LiveDetail(props: { detail: Detail }) {
                         className="p-2 rounded-xl"
                     >
                         {props.detail.streaming_u?.map((o, i) => (
-                            <option
-                                value={o.quality}
-                                key={`quality-${o?.quality}`}
-                            >
+                            <option value={o.quality} key={`quality-${o?.quality}`}>
                                 {o?.quality}p ({o?.label})
                             </option>
                         ))}
@@ -129,33 +100,18 @@ export default function LiveDetail(props: { detail: Detail }) {
                 )}
                 <h1 className="text-base font-medium mb-2">{detail.name}</h1>
                 <div className="flex space-x-1">
-                    <FontAwesomeIcon
-                        icon={faClock}
-                        className="text-xl mt-2 mr-1"
-                    />
+                    <FontAwesomeIcon icon={faClock} className="text-xl mt-2 mr-1" />
                     <div className="shadow-inner bg-gray-200 p-2 rounded-xl w-[244px] md:w-full">
                         <p className="font-medium text-sm">
-                            {moment(detail.live_at * 1000).format(
-                                "DD MMMM YYYY HH:mm",
-                            )}{" "}
-                            {!detail.status
-                                ? "— " +
-                                  moment(detail.end_at * 1000).format(
-                                      "DD MMMM YYYY HH:mm",
-                                  )
-                                : ""}
+                            {moment(detail.live_at * 1000).format("DD MMMM YYYY HH:mm")}{" "}
+                            {!detail.status ? "— " + moment(detail.end_at * 1000).format("DD MMMM YYYY HH:mm") : ""}
                         </p>
                     </div>
                 </div>
                 <div className="flex space-x-1 mt-1">
-                    <FontAwesomeIcon
-                        icon={faComment}
-                        className="text-xl mt-2 mr-1"
-                    />
+                    <FontAwesomeIcon icon={faComment} className="text-xl mt-2 mr-1" />
                     <div className="shadow-inner bg-gray-200 p-2 rounded-xl w-[244px] md:w-full">
-                        <p className="font-medium text-sm">
-                            {numberWithCommas(detail.comment)} Komentar
-                        </p>
+                        <p className="font-medium text-sm">{numberWithCommas(detail.comment)} Komentar</p>
                     </div>
                 </div>
                 <div className="flex space-x-1 mt-1">
@@ -165,13 +121,10 @@ export default function LiveDetail(props: { detail: Detail }) {
                             {numberWithCommas(detail.paid_gift)} Gold{" "}
                             {detail.type === "SR"
                                 ? "(± " +
-                                  detail.gift_idr?.res?.toLocaleString(
-                                      "id-ID",
-                                      {
-                                          style: "currency",
-                                          currency: "IDR",
-                                      },
-                                  ) +
+                                  detail.gift_idr?.res?.toLocaleString("id-ID", {
+                                      style: "currency",
+                                      currency: "IDR",
+                                  }) +
                                   ")"
                                 : ""}
                         </p>
@@ -179,14 +132,9 @@ export default function LiveDetail(props: { detail: Detail }) {
                 </div>
                 {!detail.status && (
                     <div className="flex space-x-1 mt-1">
-                        <FontAwesomeIcon
-                            icon={faStopwatch}
-                            className="text-xl mt-2 mr-2"
-                        />
+                        <FontAwesomeIcon icon={faStopwatch} className="text-xl mt-2 mr-2" />
                         <div className="shadow-inner bg-gray-200 p-2 rounded-xl w-[244px] md:w-full">
-                            <p className="font-medium text-sm">
-                                {count_time(detail.live_at, detail.end_at)}
-                            </p>
+                            <p className="font-medium text-sm">{count_time(detail.live_at, detail.end_at)}</p>
                         </div>
                     </div>
                 )}
@@ -200,11 +148,7 @@ export default function LiveDetail(props: { detail: Detail }) {
                                 <div
                                     className="flex gap-2"
                                     key={i}
-                                    data-aos={
-                                        i % 2 === 0
-                                            ? "fade-up-left"
-                                            : "fade-up-down"
-                                    }
+                                    data-aos={i % 2 === 0 ? "fade-up-left" : "fade-up-down"}
                                     data-aos-delay="300"
                                 >
                                     <Image
@@ -216,9 +160,7 @@ export default function LiveDetail(props: { detail: Detail }) {
                                     />
                                     <div className="flex-1">
                                         <p className="text-sm">{o.name}</p>
-                                        <p className="text-sm italic">
-                                            {o.total_gold} Gold
-                                        </p>
+                                        <p className="text-sm italic">{o.total_gold} Gold</p>
                                     </div>
                                 </div>
                             );
@@ -227,11 +169,7 @@ export default function LiveDetail(props: { detail: Detail }) {
                                 <div
                                     className="flex gap-2"
                                     key={i}
-                                    data-aos={
-                                        i % 2 === 0
-                                            ? "fade-down-left"
-                                            : "fade-up-right"
-                                    }
+                                    data-aos={i % 2 === 0 ? "fade-down-left" : "fade-up-right"}
                                     data-aos-delay="300"
                                 >
                                     <Image
@@ -243,9 +181,7 @@ export default function LiveDetail(props: { detail: Detail }) {
                                     />
                                     <div className="flex-1">
                                         <p className="text-sm">{o.user.name}</p>
-                                        <p className="text-sm italic">
-                                            {o.total_gold} Gold
-                                        </p>
+                                        <p className="text-sm italic">{o.total_gold} Gold</p>
                                     </div>
                                 </div>
                             );
@@ -276,9 +212,7 @@ export async function getServerSideProps(context: any) {
                         "https://www.showroom-live.com/api/live/streaming_url?room_id=" +
                             detail[0].url.split("room_id=")[1],
                     );
-                    const dt = get_live_s_url.data.streaming_url_list.filter(
-                        (e: StreamingURL) => e?.type === "hls",
-                    );
+                    const dt = get_live_s_url.data.streaming_url_list.filter((e: StreamingURL) => e?.type === "hls");
                     return {
                         props: {
                             detail: {
@@ -291,11 +225,7 @@ export async function getServerSideProps(context: any) {
                         },
                     };
                 } else {
-                    const gifts = await convertCurrency(
-                        "JPY",
-                        "IDR",
-                        detail[0].paid_gift,
-                    );
+                    const gifts = await convertCurrency("JPY", "IDR", detail[0].paid_gift);
                     return {
                         props: {
                             detail: {
@@ -307,9 +237,7 @@ export async function getServerSideProps(context: any) {
                 }
             } else {
                 if (detail[0].status) {
-                    const get_live_s_url = await fetch(
-                        "http://localhost:3000/api/live/idn_stream_url?u=dar-nv",
-                    );
+                    const get_live_s_url = await fetch("http://localhost:3000/api/live/idn_stream_url?u=dar-nv");
                     const dt_r = await get_live_s_url.json();
                     console.log(dt_r);
                     const dt = dt_r.result[0].playback_url;
