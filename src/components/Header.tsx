@@ -17,6 +17,10 @@ const menuItems: DropDownItems[] = [
         url: "/",
     },
     {
+        title: "Theater Schedule",
+        url: "/theater",
+    },
+    {
         title: "JKT48 Members",
         url: "/members",
     },
