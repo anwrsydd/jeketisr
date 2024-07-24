@@ -81,7 +81,7 @@ export async function getServerSideProps(context: any): Promise<Object> {
         console.log(context.req.headers);
         for (let i = 0; i < shows_r.length; i++) {
             const dt_r = await fetch(
-                "http://" + context.req.headers.host + "/api/theater/detail?id=" + shows_r[i].paid_live_id,
+                "https://" + context.req.headers.host + "/api/theater/detail?id=" + shows_r[i].paid_live_id,
             );
             const dt = await dt_r.json();
             shows.push({
