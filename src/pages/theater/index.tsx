@@ -78,8 +78,11 @@ export async function getServerSideProps(context: any): Promise<Object> {
     try {
         const shows_r = await get_premium_live();
         const shows: JKT48.PremiumLive[] = [];
+        console.log(context.req.headers);
         for (let i = 0; i < shows_r.length; i++) {
-            const dt_r = await fetch("http://localhost:3000/api/theater/detail?id=" + shows_r[i].paid_live_id);
+            const dt_r = await fetch(
+                "http://" + context.req.headers.host + "/api/theater/detail?id=" + shows_r[i].paid_live_id,
+            );
             const dt = await dt_r.json();
             shows.push({
                 ...dt,
