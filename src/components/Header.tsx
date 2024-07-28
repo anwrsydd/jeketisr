@@ -66,12 +66,17 @@ export default function Header({ className }: { className: string }) {
             <header
                 className={`${className} top-1.5 md:top-2 mx-2 md:mx-4 rounded-xl sticky p-3 shadow-xl bg-gray-200 z-[1000] relative flex p-4 min-h-[4rem]`}
             >
-                <div className={`${PermanentMarker.className} left-6 absolute font-bold justify-center flex flex-col`}>
+                <div
+                    className={`${PermanentMarker.className} left-6 absolute font-bold justify-center flex flex-col`}
+                >
                     <h1 className="text-xl text-gray-600">JKT48 SR</h1>
                 </div>
                 <div className="absolute right-8">
                     <button onClick={() => show()}>
-                        <FontAwesomeIcon className="mt-0.5 text-xl" icon={faBars} />
+                        <FontAwesomeIcon
+                            className="mt-0.5 text-xl"
+                            icon={faBars}
+                        />
                     </button>
                 </div>
                 <motion.div

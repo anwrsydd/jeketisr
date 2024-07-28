@@ -42,5 +42,6 @@ declare namespace JKT48 {
         start_at: number;
         setlist_img: string;
         description?: string;
+        error?: boolean;
     }
 }

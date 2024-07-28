@@ -38,8 +38,12 @@ export default function Member({
     if (error) {
         return (
             <div className="mt-8">
-                <p className="text-xl font-semibold justify-self-center">404 Not Found</p>
-                <p className="text-lg justify-self-center">Halaman yang kamu cari tidak ditemukan.</p>
+                <p className="text-xl font-semibold justify-self-center">
+                    404 Not Found
+                </p>
+                <p className="text-lg justify-self-center">
+                    Halaman yang kamu cari tidak ditemukan.
+                </p>
                 <Link href="/" className="justify-self-center">
                     <p className="text-blue-600">Back to homepage</p>
                 </Link>
@@ -60,14 +64,18 @@ export default function Member({
                         className="rounded-xl border border-slate-400 justify-self-center"
                         alt={detail.full_name}
                     />
-                    <h1 className="text-base justify-self-center font-medium">{detail.full_name.split("/")[0]}</h1>
+                    <h1 className="text-base justify-self-center font-medium">
+                        {detail.full_name.split("/")[0]}
+                    </h1>
                     <div className="min-w-full mt-2 pb-2">
                         <div className="grid grid-cols-2">
                             <div className="text-left">
                                 <p className="font-semibold">Name</p>
                             </div>
                             <div className="text-left">
-                                <p className="font-normal">{detail.full_name.split(" /")[0]}</p>
+                                <p className="font-normal">
+                                    {detail.full_name.split(" /")[0]}
+                                </p>
                             </div>
                             <div className="text-left">
                                 <p className="font-semibold">Birthday</p>
@@ -76,39 +84,51 @@ export default function Member({
                                 <p className="font-normal">{detail.birthday}</p>
                             </div>
                             <div className="text-left flex space-x-1">
-                                <FontAwesomeIcon icon={faInstagram} className="mt-1" />
+                                <FontAwesomeIcon
+                                    icon={faInstagram}
+                                    className="mt-1"
+                                />
                                 <p className="font-semibold">Instagram</p>
                             </div>
                             <div className="text-left">
                                 <Link
                                     href={
-                                        detail.instagram.startsWith("http") || detail.instagram.startsWith("www")
+                                        detail.instagram.startsWith("http") ||
+                                        detail.instagram.startsWith("www")
                                             ? detail.twitter
                                             : `https://instagram.com/${detail.instagram}`
                                     }
                                 >
                                     <p className="font-normal text-gray-700">
                                         {detail.instagram.startsWith("http")
-                                            ? detail.instagram.split("com/")[1].split("/")[0]
+                                            ? detail.instagram
+                                                  .split("com/")[1]
+                                                  .split("/")[0]
                                             : detail.instagram}
                                     </p>
                                 </Link>
                             </div>
                             <div className="text-left flex space-x-1">
-                                <FontAwesomeIcon icon={faXTwitter} className="mt-1" />
+                                <FontAwesomeIcon
+                                    icon={faXTwitter}
+                                    className="mt-1"
+                                />
                                 <p className="font-semibold">Twitter (X)</p>
                             </div>
                             <div className="text-left">
                                 <Link
                                     href={
-                                        detail.twitter.startsWith("http") || detail.twitter.startsWith("www")
+                                        detail.twitter.startsWith("http") ||
+                                        detail.twitter.startsWith("www")
                                             ? detail.twitter
                                             : `https://x.com/${detail.twitter}`
                                     }
                                 >
                                     <p className="font-normal text-gray-700">
                                         {detail.twitter.startsWith("http")
-                                            ? detail.twitter.split("com/")[1].split("/")[0]
+                                            ? detail.twitter
+                                                  .split("com/")[1]
+                                                  .split("/")[0]
                                             : detail.twitter}
                                     </p>
                                 </Link>
@@ -124,17 +144,29 @@ export default function Member({
                                 <p className="font-semibold">SHOWROOM</p>
                             </div>
                             <div className="text-left">
-                                <Link href={`https://www.showroom.com/room/profile?room_id=${sr_room_profile}`}>
-                                    <p className="font-normal text-blue-600">Here</p>
+                                <Link
+                                    href={`https://www.showroom.com/room/profile?room_id=${sr_room_profile}`}
+                                >
+                                    <p className="font-normal text-blue-600">
+                                        Here
+                                    </p>
                                 </Link>
                             </div>
                             <div className="text-left flex space-x-1">
-                                <Image src="/idn_icon.png" width="26" height="26" className="rounded-lg" alt="IDN" />
+                                <Image
+                                    src="/idn_icon.png"
+                                    width="26"
+                                    height="26"
+                                    className="rounded-lg"
+                                    alt="IDN"
+                                />
                                 <p className="font-semibold">IDN Live</p>
                             </div>
                             <div className="text-left">
                                 <Link href={detail.idn_url}>
-                                    <p className="font-normal text-blue-600">Here</p>
+                                    <p className="font-normal text-blue-600">
+                                        Here
+                                    </p>
                                 </Link>
                             </div>
                         </div>
@@ -148,13 +180,21 @@ export default function Member({
                         <div
                             className={`shrink-0 w-[15rem] h-[20rem] shadow-xl bg-gray-200 rounded-xl ${indx % 2 === 0 ? "justify-self-start" : "justify-self-end"} md:justify-self-center`}
                             key={indx}
-                            data-aos={indx % 2 === 0 ? "fade-down-left" : "fade-up-right"}
+                            data-aos={
+                                indx % 2 === 0
+                                    ? "fade-down-left"
+                                    : "fade-up-right"
+                            }
                         >
                             <Link href={`/live/${obj.d_id}`}>
                                 <div className="relative">
                                     <Image
                                         src={obj.image}
-                                        data-aos={indx % 2 === 0 ? "fade-up" : "fade-down"}
+                                        data-aos={
+                                            indx % 2 === 0
+                                                ? "fade-up"
+                                                : "fade-down"
+                                        }
                                         data-aos-delay="300"
                                         className="w-[240px] h-[160px] object-cover shrink-0"
                                         width="320"
@@ -162,7 +202,9 @@ export default function Member({
                                         alt={obj.name}
                                     />
                                     <p className="absolute top-1 left-2 bg-gray-300 text-sm rounded-xl px-2">
-                                        {obj.type === "SR" ? "SHOWROOM" : "IDN Live"}
+                                        {obj.type === "SR"
+                                            ? "SHOWROOM"
+                                            : "IDN Live"}
                                     </p>
                                 </div>
                                 <div className="p-2 px-3">
@@ -174,26 +216,49 @@ export default function Member({
                                     )}
                                     <h1 className="text-sm">{obj.name}</h1>
                                     <div className="flex gap-3">
-                                        <FontAwesomeIcon icon={faClock} className="mt-2" />
+                                        <FontAwesomeIcon
+                                            icon={faClock}
+                                            className="mt-2"
+                                        />
                                         <p className="text-sm mt-1">
-                                            {moment(obj.live_at * 1000).format("DD MMMM YYYY HH:mm")}{" "}
+                                            {moment(obj.live_at * 1000).format(
+                                                "DD MMMM YYYY HH:mm",
+                                            )}{" "}
                                             {!obj.status
-                                                ? "— " + moment(obj.end_at * 1000).format("DD MMMM YYYY HH:mm")
+                                                ? "— " +
+                                                  moment(
+                                                      obj.end_at * 1000,
+                                                  ).format("DD MMMM YYYY HH:mm")
                                                 : ""}
                                         </p>
                                     </div>
                                     <div className="flex gap-3 mt-1">
-                                        <FontAwesomeIcon icon={faComment} className="mt-0.5" />
-                                        <p className="text-sm">{obj.comment} Komentar</p>
+                                        <FontAwesomeIcon
+                                            icon={faComment}
+                                            className="mt-0.5"
+                                        />
+                                        <p className="text-sm">
+                                            {obj.comment} Komentar
+                                        </p>
                                     </div>
                                     <div className="flex gap-2 mt-1">
                                         <FontAwesomeIcon icon={faGifts} />
-                                        <p className="text-sm">{numberWithCommas(obj.paid_gift)} Gold (paid gift)</p>
+                                        <p className="text-sm">
+                                            {numberWithCommas(obj.paid_gift)}{" "}
+                                            Gold (paid gift)
+                                        </p>
                                     </div>
                                     {!obj.status && (
                                         <div className="flex gap-3.5 mt-1">
-                                            <FontAwesomeIcon icon={faStopwatch} />
-                                            <p className="text-sm">{count_time(obj.live_at, obj.end_at)}</p>
+                                            <FontAwesomeIcon
+                                                icon={faStopwatch}
+                                            />
+                                            <p className="text-sm">
+                                                {count_time(
+                                                    obj.live_at,
+                                                    obj.end_at,
+                                                )}
+                                            </p>
                                         </div>
                                     )}
                                 </div>
@@ -210,12 +275,16 @@ export async function getServerSideProps(context: any) {
     try {
         const query: string[] = context.params.id.toLowerCase().split("_");
         const query_extract: string =
-            query[0].toUpperCase() + "_" + (query[1].charAt(0).toUpperCase() + query[1].slice(1));
+            query[0].toUpperCase() +
+            "_" +
+            (query[1].charAt(0).toUpperCase() + query[1].slice(1));
         const detail: JKT48.MemberDetail[] = await get_member_detail(
             query[1] === "olinem" ? "JKT48_OlineM" : query_extract,
         );
         const sr_room_profile = await get_room_profile(detail[0].sr_room_id);
-        const history_live = await get_member_live(query[1].charAt(0).toUpperCase() + query[1].slice(1));
+        const history_live = await get_member_live(
+            query[1].charAt(0).toUpperCase() + query[1].slice(1),
+        );
         return {
             props: {
                 detail: detail[0],

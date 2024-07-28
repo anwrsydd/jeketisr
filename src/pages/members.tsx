@@ -2,18 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { get_members } from "@/lib/utils/fetch_data";
 
-export default function Members({ members }: { members: JKT48.MemberDetail[] }) {
+export default function Members({
+    members,
+}: {
+    members: JKT48.MemberDetail[];
+}) {
     return (
         <div className="m-2 mx-[2rem] md:mx-[6rem]">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {members.map((o, i) => (
                     <div
                         className="relative group h-[181px] w-[128px] justify-self-center"
-                        data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"}
+                        data-aos={
+                            i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"
+                        }
                         data-aos-delay="200"
                         key={i}
                     >
-                        <Link href={`/member/${o.sr_room_url_key.toLowerCase()}`}>
+                        <Link
+                            href={`/member/${o.sr_room_url_key.toLowerCase()}`}
+                        >
                             <Image
                                 src={o.image}
                                 alt={o.full_name}

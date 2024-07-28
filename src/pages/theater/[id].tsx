@@ -58,13 +58,23 @@ export default function TheaterDetail({ id }: { id: string | number }) {
                     <div className="flex space-x-1 mt-3">
                         <FontAwesomeIcon icon={faCalendar} className="mt-0.5" />
                         <p className="font-medium text-sm">
-                            {moment(detail.show_date * 1000).format("dddd, DD MMMM YYYY HH:mm")}
+                            {moment(detail.show_date * 1000).format(
+                                "dddd, DD MMMM YYYY HH:mm",
+                            )}
                         </p>
                     </div>
                     <div className="flex space-x-1 mt-2">
-                        <Image src="/showroom_icon.png" width="26" height="26" className="rounded-lg" alt="SHOWROOM" />
+                        <Image
+                            src="/showroom_icon.png"
+                            width="26"
+                            height="26"
+                            className="rounded-lg"
+                            alt="SHOWROOM"
+                        />
                         <Link href={detail.room_url}>
-                            <p className="font-semibold underline">Watch Premium Live</p>
+                            <p className="font-semibold underline">
+                                Watch Premium Live
+                            </p>
                         </Link>
                     </div>
                 </div>
@@ -73,29 +83,41 @@ export default function TheaterDetail({ id }: { id: string | number }) {
                         <h3 className="font-semibold">Members line up</h3>
                         {detail?.member_perform?.length === 0 && (
                             <div className="flex">
-                                <p className="justify-center text-xl font-medium">Data line up belum tersedia :(</p>
+                                <p className="justify-center text-xl font-medium">
+                                    Data line up belum tersedia :(
+                                </p>
                             </div>
                         )}
                         {detail?.member_perform?.length > 0 && (
                             <div className="grid grid-cols-3 gap-1 p-3 bg-gray-200 rounded-xl shadow-inner">
-                                {detail?.member_perform?.map((o: JKT48.MemberDetail, i: number) => (
-                                    <div
-                                        className="h-[180px] w-[85px]"
-                                        data-aos={i % 2 === 0 ? "flip-right" : "flip-left"}
-                                        key={i}
-                                    >
-                                        <Link href={`/member/${o.sr_room_url_key?.toLowerCase()}`}>
-                                            <Image
-                                                src={o.image}
-                                                height="120"
-                                                width="85"
-                                                className="rounded-xl object-fit"
-                                                alt={o.full_name}
-                                            />
-                                            <h4 className="text-sm font-medium">{o.full_name}</h4>
-                                        </Link>
-                                    </div>
-                                ))}
+                                {detail?.member_perform?.map(
+                                    (o: JKT48.MemberDetail, i: number) => (
+                                        <div
+                                            className="h-[180px] w-[85px]"
+                                            data-aos={
+                                                i % 2 === 0
+                                                    ? "flip-right"
+                                                    : "flip-left"
+                                            }
+                                            key={i}
+                                        >
+                                            <Link
+                                                href={`/member/${o.sr_room_url_key?.toLowerCase()}`}
+                                            >
+                                                <Image
+                                                    src={o.image}
+                                                    height="120"
+                                                    width="85"
+                                                    className="rounded-xl object-fit"
+                                                    alt={o.full_name}
+                                                />
+                                                <h4 className="text-sm font-medium">
+                                                    {o.full_name}
+                                                </h4>
+                                            </Link>
+                                        </div>
+                                    ),
+                                )}
                             </div>
                         )}
                     </div>
