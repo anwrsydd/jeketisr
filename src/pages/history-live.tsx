@@ -1,17 +1,9 @@
-import {
-    get_history_live,
-    get_data_length,
-} from "../lib/utils/get_history_live";
+import { get_history_live, get_data_length } from "../lib/utils/get_history_live";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faClock,
-    faComment,
-    faGifts,
-    faStopwatch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faClock, faComment, faGifts, faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment-timezone";
 import "moment/locale/id";
 import { numberWithCommas, count_time } from "../lib/utils/additional";
@@ -59,9 +51,7 @@ export default function HistoryLive({
                                     alt={obj.name}
                                 />
                                 <p className="absolute top-1 left-2 bg-gray-300 text-sm rounded-xl px-2">
-                                    {obj.type === "SR"
-                                        ? "SHOWROOM"
-                                        : "IDN Live"}
+                                    {obj.type === "SR" ? "SHOWROOM" : "IDN Live"}
                                 </p>
                             </div>
                             <div className="p-2 px-3">
@@ -73,47 +63,26 @@ export default function HistoryLive({
                                 )}
                                 <h1 className="text-sm">{obj.name}</h1>
                                 <div className="flex gap-3">
-                                    <FontAwesomeIcon
-                                        icon={faClock}
-                                        className="mt-2"
-                                    />
+                                    <FontAwesomeIcon icon={faClock} className="mt-2" />
                                     <p className="text-sm mt-1">
-                                        {moment(obj.live_at * 1000).format(
-                                            "DD MMMM YYYY HH:mm",
-                                        )}{" "}
+                                        {moment(obj.live_at * 1000).format("DD MMMM YYYY HH:mm")}{" "}
                                         {!obj.status
-                                            ? "— " +
-                                              moment(obj.end_at * 1000).format(
-                                                  "DD MMMM YYYY HH:mm",
-                                              )
+                                            ? "— " + moment(obj.end_at * 1000).format("DD MMMM YYYY HH:mm")
                                             : ""}
                                     </p>
                                 </div>
                                 <div className="flex gap-3 mt-1">
-                                    <FontAwesomeIcon
-                                        icon={faComment}
-                                        className="mt-0.5"
-                                    />
-                                    <p className="text-sm">
-                                        {obj.comment} Komentar
-                                    </p>
+                                    <FontAwesomeIcon icon={faComment} className="mt-0.5" />
+                                    <p className="text-sm">{obj.comment} Komentar</p>
                                 </div>
                                 <div className="flex gap-2 mt-1">
                                     <FontAwesomeIcon icon={faGifts} />
-                                    <p className="text-sm">
-                                        {numberWithCommas(obj.paid_gift)} Gold
-                                        (paid gift)
-                                    </p>
+                                    <p className="text-sm">{numberWithCommas(obj.paid_gift)} Gold (paid gift)</p>
                                 </div>
                                 {!obj.status && (
                                     <div className="flex gap-3.5 mt-1">
                                         <FontAwesomeIcon icon={faStopwatch} />
-                                        <p className="text-sm">
-                                            {count_time(
-                                                obj.live_at,
-                                                obj.end_at,
-                                            )}
-                                        </p>
+                                        <p className="text-sm">{count_time(obj.live_at, obj.end_at)}</p>
                                     </div>
                                 )}
                             </div>
@@ -126,26 +95,18 @@ export default function HistoryLive({
                     Showing
                     <span className="font-semibold">{10 * q - 10}</span>
                     to
-                    <span className="font-semibold">
-                        {10 * q > total_data ? total_data : 10 * q}
-                    </span>
+                    <span className="font-semibold">{10 * q > total_data ? total_data : 10 * q}</span>
                     of
                     <span className="font-semibold">{total_data}</span>
                     data
                 </p>
                 {q !== 1 && (
-                    <Link
-                        className="m-3 p-3 bg-gray-400/60 shadow-xl rounded-xl"
-                        href={`/history-live?q=${q - 1}`}
-                    >
+                    <Link className="m-3 p-3 bg-gray-400/60 shadow-xl rounded-xl" href={`/history-live?q=${q - 1}`}>
                         Previous
                     </Link>
                 )}
                 {10 * q < total_data && (
-                    <Link
-                        className="m-3 p-3 bg-gray-400/60 shadow-xl rounded-xl"
-                        href={`/history-live?q=${q + 1}`}
-                    >
+                    <Link className="m-3 p-3 bg-gray-400/60 shadow-xl rounded-xl" href={`/history-live?q=${q + 1}`}>
                         Next
                     </Link>
                 )}
@@ -157,8 +118,7 @@ export default function HistoryLive({
 export async function getServerSideProps(context: any): Promise<Object> {
     const getDataLength = await get_data_length("jkt48_live_history");
     const totalPages: number = Math.ceil(getDataLength / 10);
-    let q: number =
-        context.query?.q !== undefined ? parseInt(context.query.q) : 1;
+    let q: number = context.query?.q !== undefined ? parseInt(context.query.q) : 1;
     if (q === undefined || q === null || isNaN(q)) {
         q = 1;
     }
@@ -172,10 +132,7 @@ export async function getServerSideProps(context: any): Promise<Object> {
             },
         };
     } else {
-        const last_live = await get_history_live(
-            getDataLength - 10 * q,
-            getDataLength - (10 * q - 10),
-        );
+        const last_live = await get_history_live(getDataLength - 10 * q, getDataLength - (10 * q - 10));
         return {
             props: {
                 last_live: last_live.reverse(),

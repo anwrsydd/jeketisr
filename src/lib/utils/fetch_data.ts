@@ -3,25 +3,12 @@ import cheerio from "cheerio";
 import moment from "moment-timezone";
 import "moment/locale/id";
 import { db } from "../database/firestore";
-import {
-    getFirestore,
-    getDocs,
-    getDoc,
-    collection,
-    query,
-    where,
-    orderBy,
-    limit,
-} from "firebase/firestore";
+import { getFirestore, getDocs, getDoc, collection, query, where, orderBy, limit } from "firebase/firestore";
 import { get_room_profile } from "./showroom";
 import { setlist_image } from "../../../config/config";
 
 async function get_member_detail(r_u_k: string): Promise<JKT48.MemberDetail[]> {
-    const q = query(
-        collection(db, "jkt48_members"),
-        where("sr_room_url_key", "==", r_u_k),
-        limit(1),
-    );
+    const q = query(collection(db, "jkt48_members"), where("sr_room_url_key", "==", r_u_k), limit(1));
     const snapshot = await getDocs(q);
     const data = snapshot.docs.map((doc) => {
         return doc.data() as JKT48.MemberDetail;
@@ -56,20 +43,15 @@ async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
     const data = await axios.get("https://jkt48.com/theater/schedule?lang=id");
     const $ = cheerio.load(data.data);
     const theater_schedule: JKT48.TheaterSchedule[] = [];
-    $(
-        "div.entry-mypage > div.entry-mypage__history:nth-child(5) > div.table-responsive > table.table > tbody > tr",
-    )
+    $("div.entry-mypage > div.entry-mypage__history:nth-child(5) > div.table-responsive > table.table > tbody > tr")
         .get()
         .map(async (o, i) => {
             let d: any = o.children.filter((e) => e.type === "tag");
             let show_date = moment(
-                d[0].children[0]?.data +
-                    d[0]?.children[2]?.data.replace("Show ", " "),
+                d[0].children[0]?.data + d[0]?.children[2]?.data.replace("Show ", " "),
                 "dddd, D.M.YYYY HH:mm",
             ).unix();
-            let show_date_str =
-                d[0].children[0].data +
-                d[0].children[2]?.data?.replace("Show ", " ");
+            let show_date_str = d[0].children[0].data + d[0].children[2]?.data?.replace("Show ", " ");
             let setlist_name = d[1].children[2].data;
             let member_perform = d[2].children
                 .filter((j: { type: string }) => j.type === "tag")
@@ -97,11 +79,8 @@ async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
     const data: JKT48.PremiumLive[] = [] as JKT48.PremiumLive[];
     for (let i = 0; i < snapshot.docs.length; i++) {
         const dt = snapshot.docs[i].data();
-        const setlist_img_r = setlist_image.find((obj) =>
-            obj.title.startsWith(dt.title.split(" -")[0]),
-        );
-        const setlist_img =
-            setlist_img_r !== undefined ? setlist_img_r.url : dt.image;
+        const setlist_img_r = setlist_image.find((obj) => obj.title.startsWith(dt.title.split(" -")[0]));
+        const setlist_img = setlist_img_r !== undefined ? setlist_img_r.url : dt.image;
         const desc_r = await fetch(dt.entrance_url);
         const desc_d = await desc_r.text();
         const description = cheerio
@@ -128,10 +107,7 @@ async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
 }
 
 async function search_premium_live(id: number): Promise<JKT48.PremiumLive> {
-    const q = query(
-        collection(db, "jkt48_shows"),
-        where("paid_live_id", "==", id),
-    );
+    const q = query(collection(db, "jkt48_shows"), where("paid_live_id", "==", id));
     const snapshot = await getDocs(q);
     if (snapshot.docs.length < 1) {
         return {
@@ -153,11 +129,8 @@ async function search_premium_live(id: number): Promise<JKT48.PremiumLive> {
         //    const data: JKT48.PremiumLive[] = [] as JKT48.PremiumLive[];
         //    for (let i = 0; i < snapshot.docs.length; i++) {
         const dt = snapshot.docs[0].data();
-        const setlist_img_r = setlist_image.find((obj) =>
-            obj.title.startsWith(dt.title.split(" -")[0]),
-        );
-        const setlist_img =
-            setlist_img_r !== undefined ? setlist_img_r.url : dt.image;
+        const setlist_img_r = setlist_image.find((obj) => obj.title.startsWith(dt.title.split(" -")[0]));
+        const setlist_img = setlist_img_r !== undefined ? setlist_img_r.url : dt.image;
         const desc_r = await fetch(dt.entrance_url);
         const desc_d = await desc_r.text();
         const description = cheerio

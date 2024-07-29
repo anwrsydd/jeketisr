@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { fetch_premium_live } from "@/lib/utils/showroom";
-import {
-    get_theater_schedule,
-    get_members,
-    get_premium_live,
-} from "@/lib/utils/fetch_data";
+import { get_theater_schedule, get_members, get_premium_live } from "@/lib/utils/fetch_data";
 import { SHOWROOM_API, setlist_image } from "../../../../config/config";
 import get_theater_detail from "@/lib/theater/detail";
 type ShowDetail = {
@@ -17,10 +13,7 @@ type ShowDetail = {
     member_perform: object[];
 };
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<API.TheaterDetail>,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<API.TheaterDetail>) {
     if (!req.query.id) {
         return res.status(400).json({
             image: "",
@@ -50,7 +43,7 @@ export default async function handler(
                 show_date_str: "",
                 setlist_name: "",
                 member_perform: [],
-                error: true
+                error: true,
             });
         } else {
             return res.status(200).json(data);
