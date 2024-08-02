@@ -31,10 +31,14 @@ export default function Home({
     member_birthday: JKT48.MemberDetail[];
 }) {
     const [showlist, setShowList] = useState<any>([]);
+    const [isLoad, setIsLoad] = useState(true)
     useEffect(() => {
         fetch("/api/theater/list")
             .then((res) => res.json())
-            .then((d) => setShowList(d));
+            .then((d) => {
+                setShowList(d)
+                setIsLoad(false)
+            });
     });
     return (
         <>
@@ -105,6 +109,9 @@ export default function Home({
             </div>
             <div className="overflow-auto mt-4">
                 <h2 className="font-semibold">Jadwal SHOW (SR Premium Live)</h2>
+                {isLoad && (
+                    <p>Loading...</p>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-2 h-auto gap-4">
                     {showlist.map((o: API.TheaterDetail, i: number) => (
                         <div

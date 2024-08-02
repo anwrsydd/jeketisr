@@ -7,7 +7,6 @@ declare namespace API {
         show_date: number;
         setlist_img: string;
         description: string;
-        show_date_str: string;
         setlist_name: string;
         member_perform: JKT48.MemberDetail[];
         error?: boolean;

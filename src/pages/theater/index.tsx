@@ -78,8 +78,6 @@ export async function getServerSideProps(context: any): Promise<Object> {
     try {
         const shows_r = await get_premium_live();
         const shows: JKT48.PremiumLive[] = [];
-        console.log(context.req.headers);
-        console.log(context.req.headers["x-forwarded-proto"]);
         for (let i = 0; i < shows_r.length; i++) {
             const dt_r = await fetch(
                 context.req.headers["x-forwarded-proto"] +

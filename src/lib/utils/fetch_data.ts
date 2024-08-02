@@ -32,11 +32,11 @@ async function get_member_birthday(): Promise<JKT48.MemberDetail[]> {
         .map((doc) => doc.data() as JKT48.MemberDetail)
         .filter(
             (d) =>
-                new Date(d.birthday).getMonth() === new Date().getMonth() &&
-                (new Date(d.birthday).getDate() > new Date().getDate() ||
-                    new Date(d.birthday).getDate() === new Date().getDate()),
+                moment(d.birthday, "D MMMM YYYY").month() === new Date().getMonth() &&
+                (moment(d.birthday, "D MMMM YYYY").date() > new Date().getDate() ||
+                    moment(d.birthday, "D MMMM YYYY").date() === new Date().getDate()),
         );
-    return data;
+    return data.sort((a, b) => moment(a.birthday, "D MMMM YYYY").date() - moment(b.birthday, "D MMMM YYYY").date());
 }
 
 async function get_theater_schedule(): Promise<JKT48.TheaterSchedule[]> {
@@ -99,6 +99,7 @@ async function get_premium_live(): Promise<JKT48.PremiumLive[]> {
             room_id: dt.room_id,
             room_name: dt.room_name,
             start_at: dt.start_at,
+            member_perform: dt.member_perform,
             setlist_img,
             description,
         });
@@ -122,6 +123,7 @@ async function search_premium_live(id: number): Promise<JKT48.PremiumLive> {
             room_name: "",
             start_at: 0,
             setlist_img: "",
+            member_perform: [],
             description: "",
             error: true,
         };
@@ -151,6 +153,7 @@ async function search_premium_live(id: number): Promise<JKT48.PremiumLive> {
             start_at: dt.start_at,
             setlist_img,
             description,
+            member_perform: dt.member_perform
         } as JKT48.PremiumLive;
     }
 }
