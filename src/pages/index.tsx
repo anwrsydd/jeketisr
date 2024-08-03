@@ -44,12 +44,16 @@ export default function Home({
     });
     return (
         <>
-            <div className="overflow-auto">
-                <h2 className="font-semibold">
-                    <FontAwesomeIcon icon={faClockRotateLeft} className="mr-1 text-lg" />
+            <div className="">
+                
+                <div className="relative flex mb-6">
+                <h2 className="font-semibold text-lg absolute left-0">
+                    <FontAwesomeIcon icon={faClockRotateLeft} className="mr-1" />
                     Live terakhir
                 </h2>
-                <div className="snap-x snap-mandatory flex overflow-x-auto h-auto gap-14 p-4 shadow-inner bg-white/40 rounded-xl">
+                <Link className="mt-1 absolute right-0 text-sm font-medium hover:underline" href="/history-live">See all history</Link>
+                </div>
+                <div className="snap-x snap-mandatory flex overflow-x-auto h-auto gap-10 p-4 shadow-inner bg-white/40 rounded-xl">
                     {last_live.map((obj, indx) => (
                         <div
                             className="snap-always snap-center shrink-0 w-60 h-[19rem] shadow-xl bg-gray-200 rounded-xl"
@@ -113,9 +117,9 @@ export default function Home({
                 </div>
             </div>
             <div className="overflow-auto mt-4">
-                <h2 className="font-semibold">
-                    <FontAwesomeIcon icon={faCalendarDays} className="mr-1 text-lg" />
-                    Jadwal SHOW (SR Premium Live)
+                <h2 className="font-semibold text-lg">
+                    <FontAwesomeIcon icon={faCalendarDays} className="mr-1" />
+                    Jadwal Show (SR Premium Live)
                 </h2>
                 {isLoad && <p>Loading...</p>}
                 <div className="grid grid-cols-1 md:grid-cols-2 h-auto gap-4">
@@ -174,8 +178,8 @@ export default function Home({
                 </div>
             </div>
             <div className="mt-4 md:mx-[2rem]">
-                <h2 className="text-base font-semibold">
-                    <FontAwesomeIcon icon={faCakeCandles} className="mr-1 text-lg" />
+                <h2 className="text-base font-semibold text-lg">
+                    <FontAwesomeIcon icon={faCakeCandles} className="mr-1" />
                     Next Birthday (bulan ini)
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4 md:mx-[2rem]">

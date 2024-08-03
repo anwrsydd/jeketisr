@@ -243,6 +243,7 @@ export async function getServerSideProps(context: any) {
                             "/api/live/idn_stream_url?u=" +
                             detail[0].url.split("idn.app/")[1],
                     );
+                    console.log(context.req.headers)
                     const dt_r = await get_live_s_url.json();
                     const dt = dt_r.result[0].playback_url;
                     return {

@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
     } else {
         const { u } = req.query;
-        const res_r = await fetch("https://www.idn.app/_next/data/R8z5FpT2IFCip3pLMjCnr/" + u + ".json?username=" + u);
+        const res_r = await fetch("https://www.idn.app/_next/data/2gaZC7BsQkce_fYkSiMjY/" + u + ".json?username=" + u);
         let data = await res_r.json();
         if (!data.pageProps.livestreams) {
             return res.status(404).json({
