@@ -44,7 +44,8 @@ export default function Home({
     });
     return (
         <>
-            <div className="">
+            <p>{process.env.TEST}</p>
+            <div className="overflow-auto">
                 
                 <div className="relative flex mb-6">
                 <h2 className="font-semibold text-lg absolute left-0">

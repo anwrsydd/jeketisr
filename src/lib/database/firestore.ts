@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, getDocs, collection, query, where, orderBy, limit } from "firebase/firestore";
 
 const config: Object = {
-    apiKey: "AIzaSyDoTkiUdSavOammxE3V1P29OQMXM2DWzU0",
-    authDomain: "projek-6531.firebaseapp.com",
-    projectId: "projek-6531",
-    storageBucket: "projek-6531.appspot.com",
-    messagingSenderId: "13844309476",
-    appId: "1:13844309476:web:1fc68287d42624ea0ad3f1",
-    measurementId: "G-MVND532Q3Y",
+    apiKey: process.env.FIREBASE_APIKEY,
+    authDomain: process.env.FIREBASE_AUTHDOMAIN,
+    projectId: process.env.FIREBASE_PROJECTID,
+    storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+    appId: process.env.FIREBASE_APPID,
+    measurementId: process.env.FIREBASE_MEASUREMENTID,
 };
 
 const fire = initializeApp(config);
