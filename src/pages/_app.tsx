@@ -25,9 +25,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
     const specialPages = ["/cekoshi"];
     if (specialPages.includes(router.pathname)) {
         return (
-            <main className={`${lexend.variable} font-lexend`}>
-                <Component {...pageProps} />
-            </main>
+            <>
+                <main className={`${lexend.variable} font-lexend`}>
+                    <Component {...pageProps} />
+                </main>
+            </>
         );
     }
     return (
@@ -36,7 +38,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
                 <title>JKT48 SR Log</title>
             </Head>
             <Header className={lexend.variable} />
-            <div className="overflow-auto min-h-screen" key={router.route}>
+            <div className="overflow-auto min-h-screen w-screen" key={router.route}>
                 <main className={`m-4 md:mx-14 ${lexend.variable} font-lexend`}>
                     <Component {...pageProps} />
                 </main>
