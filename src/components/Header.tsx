@@ -25,6 +25,10 @@ const menuItems: DropDownItems[] = [
         url: "/members",
     },
     {
+        title: "Cek Oshi",
+        url: "/cekoshi",
+    },
+    {
         title: "About",
         url: "/about",
     },

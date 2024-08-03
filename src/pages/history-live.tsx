@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faComment, faGifts, faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faComment, faGifts, faStopwatch, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment-timezone";
 import "moment/locale/id";
 import { numberWithCommas, count_time } from "../lib/utils/additional";
@@ -33,7 +33,11 @@ export default function HistoryLive({
     }
     return (
         <>
-            <div className="grid grid-cols-1 gap-4">
+            <h2 className="font-semibold">
+                <FontAwesomeIcon icon={faClockRotateLeft} className="mr-1 text-lg" />
+                History Live
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {last_live.map((obj, indx) => (
                     <div
                         className="w-72 h-[20rem] shadow-xl bg-gray-200 rounded-xl justify-self-center"

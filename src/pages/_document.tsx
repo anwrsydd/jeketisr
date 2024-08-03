@@ -4,7 +4,6 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
-                <title>JKT48 SR Log</title>
                 <meta
                     name="description"
                     content="Fanmade website, dibuat untuk melihat aktivitas live member jkt48, melihat jadwal theater minggu ini, dan lain-lain."

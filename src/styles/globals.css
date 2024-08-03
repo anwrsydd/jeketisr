@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.background-animate {
+    background-size: 400%;
+
+    -webkit-animation: bgAnimate 5s ease infinite;
+    -moz-animation: bgAnimate 5s ease infinite;
+    animation: bgAnimate 5s ease infinite;
+  }
+
+  @keyframes bgAnimate {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { get_premium_live } from "@/lib/utils/fetch_data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment-timezone";
 import "moment/locale/id";
 import ErrorMsg from "@/components/ErrorMsg";
@@ -11,7 +11,10 @@ export default function Theater({ shows, error }: { shows: API.TheaterDetail[]; 
     if (error) return <ErrorMsg />;
     return (
         <div className="mt-2">
-            <h2>Jadwal Show (Premium Live)</h2>
+            <h2 className="font-semibold">
+                <FontAwesomeIcon icon={faCalendarDays} className="mr-1 text-lg" />
+                Jadwal Show (Premium Live)
+            </h2>
             <div className="space-y-2 grid grid-cols-1 md:grid-cols-2 place-items-center">
                 {shows.map((o: API.TheaterDetail, i: number) => {
                     return (

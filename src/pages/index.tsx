@@ -11,6 +11,8 @@ import {
     faStopwatch,
     faArrowRight,
     faCakeCandles,
+    faClockRotateLeft,
+    faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
 import { getDt, db } from "../lib/database/firestore";
 import { useEffect, useState } from "react";
@@ -43,7 +45,10 @@ export default function Home({
     return (
         <>
             <div className="overflow-auto">
-                <h2 className="font-semibold">Live terakhir</h2>
+                <h2 className="font-semibold">
+                    <FontAwesomeIcon icon={faClockRotateLeft} className="mr-1 text-lg" />
+                    Live terakhir
+                </h2>
                 <div className="snap-x snap-mandatory flex overflow-x-auto h-auto gap-14 p-4 shadow-inner bg-white/40 rounded-xl">
                     {last_live.map((obj, indx) => (
                         <div
@@ -99,7 +104,7 @@ export default function Home({
                             </Link>
                         </div>
                     ))}
-                    <div className="snap-always snap-center justify-self-center h-[8rem] hover:scale-110 duration-300 transition-all">
+                    <div className="snap-always snap-center justify-self-center h-[8rem] hover:text-blue-600">
                         <Link href="/history-live" title="See all history live">
                             <FontAwesomeIcon className="mt-[8rem] text-3xl" icon={faArrowRight} />
                             <p className="text-sm font-semibold">See all history live</p>
@@ -108,7 +113,10 @@ export default function Home({
                 </div>
             </div>
             <div className="overflow-auto mt-4">
-                <h2 className="font-semibold">Jadwal SHOW (SR Premium Live)</h2>
+                <h2 className="font-semibold">
+                    <FontAwesomeIcon icon={faCalendarDays} className="mr-1 text-lg" />
+                    Jadwal SHOW (SR Premium Live)
+                </h2>
                 {isLoad && (
                     <p>Loading...</p>
                 )}
@@ -133,7 +141,7 @@ export default function Home({
                                 <div className="mt-4 border border-0 border-t-2 border-gray-700">
                                     <div className="mt-2 flex space-x-2 text-sm">
                                         <FontAwesomeIcon icon={faCalendar} className="mt-0.5" />
-                                        <p>{moment(o.show_date * 1000).format("dddd, DD MMMM YYYY HH:mm")}</p>
+                                        <p>{moment(o.show_date * 1000).format("dddd, DD MMMM YYYY HH:mm")} WIB</p>
                                     </div>
                                     <h4 className="text-base font-medium">Performing members</h4>
                                     <div className="px-1.5 py-3 bg-gray-400/50 snap-x snap-mandatory flex gap-6 overflow-x-auto rounded-md shadow-inner mb-2">
@@ -142,7 +150,7 @@ export default function Home({
                                         )}
                                         {o.member_perform.map((d: JKT48.MemberDetail, ii: number) => (
                                             <div
-                                                className="snap-always shrink-0 snap-align-none"
+                                                className="snap-always shrink-0 snap-align-none hover:text-blue-600"
                                                 key={`perform_member_${i}_${ii}`}
                                             >
                                                 <Link href={`/member/${d.sr_room_url_key}`} title={d.full_name}>
@@ -168,8 +176,11 @@ export default function Home({
                 </div>
             </div>
             <div className="mt-4 md:mx-[2rem]">
-                <h2 className="text-base font-semibold">Next Birthday (bulan ini)</h2>
-                <div className="grid grid-cols-1 gap-1 md:mx-[2rem]">
+                <h2 className="text-base font-semibold">
+                    <FontAwesomeIcon icon={faCakeCandles} className="mr-1 text-lg" />
+                    Next Birthday (bulan ini)
+                 </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4 md:mx-[2rem]">
                     {member_birthday.map((o, i) => {
                         const bd = moment(o.birthday, "D MMMM YYYY").format("D MMMM");
                         return (
