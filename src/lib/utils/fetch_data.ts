@@ -153,7 +153,7 @@ async function search_premium_live(id: number): Promise<JKT48.PremiumLive> {
             start_at: dt.start_at,
             setlist_img,
             description,
-            member_perform: dt.member_perform
+            member_perform: dt.member_perform,
         } as JKT48.PremiumLive;
     }
 }

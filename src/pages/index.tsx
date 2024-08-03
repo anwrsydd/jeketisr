@@ -33,13 +33,13 @@ export default function Home({
     member_birthday: JKT48.MemberDetail[];
 }) {
     const [showlist, setShowList] = useState<any>([]);
-    const [isLoad, setIsLoad] = useState(true)
+    const [isLoad, setIsLoad] = useState(true);
     useEffect(() => {
         fetch("/api/theater/list")
             .then((res) => res.json())
             .then((d) => {
-                setShowList(d)
-                setIsLoad(false)
+                setShowList(d);
+                setIsLoad(false);
             });
     });
     return (
@@ -117,9 +117,7 @@ export default function Home({
                     <FontAwesomeIcon icon={faCalendarDays} className="mr-1 text-lg" />
                     Jadwal SHOW (SR Premium Live)
                 </h2>
-                {isLoad && (
-                    <p>Loading...</p>
-                )}
+                {isLoad && <p>Loading...</p>}
                 <div className="grid grid-cols-1 md:grid-cols-2 h-auto gap-4">
                     {showlist.map((o: API.TheaterDetail, i: number) => (
                         <div
@@ -179,7 +177,7 @@ export default function Home({
                 <h2 className="text-base font-semibold">
                     <FontAwesomeIcon icon={faCakeCandles} className="mr-1 text-lg" />
                     Next Birthday (bulan ini)
-                 </h2>
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4 md:mx-[2rem]">
                     {member_birthday.map((o, i) => {
                         const bd = moment(o.birthday, "D MMMM YYYY").format("D MMMM");

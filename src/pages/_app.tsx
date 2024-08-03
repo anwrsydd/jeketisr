@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import { useEffect } from "react";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Header from "../components/Header";
@@ -22,12 +22,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
             once: true,
         });
     });
-    const specialPages = ['/cekoshi']
+    const specialPages = ["/cekoshi"];
     if (specialPages.includes(router.pathname)) {
         return (
-        <main className={`${lexend.variable} font-lexend`}>
-            <Component {...pageProps} />
-        </main>
+            <main className={`${lexend.variable} font-lexend`}>
+                <Component {...pageProps} />
+            </main>
         );
     }
     return (
