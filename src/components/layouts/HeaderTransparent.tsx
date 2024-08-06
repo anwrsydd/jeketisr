@@ -35,7 +35,7 @@ const menuItems: DropDownItems[] = [
 ];
 
 const PermanentMarker = localFont({
-    src: "../fonts/PermanentMarker-Regular.ttf",
+    src: "../../fonts/PermanentMarker-Regular.ttf",
 });
 export default function HeaderTransparent({ className }: { className: string }) {
     const variants: any = {
