@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     title: "Theater Schedule",
 };
 
+export const dynamic = "force-dynamic"
+
 export default async function TheaterPage() {
     const { shows, error }: Data = await getData(headers().get("x-forwarded-proto"), headers().get("host"));
     if (error) return <ErrorMsg />;

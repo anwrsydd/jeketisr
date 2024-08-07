@@ -46,6 +46,8 @@ export const metadata: Metadata = {
     title: "Live Detail",
 };
 
+export const dynamic = "force-dynamic"
+
 export default async function LiveDetailPage({ params }: { params: { id: string } }) {
     const { detail } = await getData(params.id, headers().get("x-forwarded-proto"), headers().get("host"));
     if (detail.error) {

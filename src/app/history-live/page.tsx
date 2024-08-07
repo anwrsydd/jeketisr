@@ -22,6 +22,8 @@ export const metadata: Metadata = {
     title: "History Live",
 };
 
+export const dynamic = "force-dynamic"
+
 export default async function HistoryLivePage({
     searchParams,
 }: {

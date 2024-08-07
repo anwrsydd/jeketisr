@@ -28,6 +28,8 @@ type Data = {
     history_live: JKT48.LastLive[];
 };
 
+export const dynamic = "force-dynamic"
+
 export default async function MemberPage({ params }: { params: { id: string } }) {
     const dt = await getData(params.id);
     if (dt === null) {
