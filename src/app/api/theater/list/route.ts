@@ -1,6 +1,8 @@
 import { get_premium_live } from "@/lib/utils/fetch_data";
 import get_theater_detail from "@/lib/theater/detail";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
     const d = await get_premium_live();
     const result: API.TheaterDetail[] = [];
