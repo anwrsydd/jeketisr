@@ -16,6 +16,10 @@ const setlist_image = [
         title: "Ingin Bertemu",
         url: "/media/setlist-img/ingin-bertemu.jpg",
     },
+    {
+        title: "Tunas di Balik Seragam",
+        url: "/media/setlist-img/tunas-di-balik-seragam.jpg"
+    }
 ];
 
 export { SHOWROOM_API, setlist_image };
